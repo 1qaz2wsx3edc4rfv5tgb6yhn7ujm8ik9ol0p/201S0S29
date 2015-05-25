@@ -1,0 +1,23 @@
+#rptitle|sql|keyword|eml addr|[all|bc]
+
+Create temp shared tables|cfg_cra_temptables_init.sql|create_temptables|t_kohgh@m1.com.sg|all
+Missing SurfShare bundle|cfg_cra_missing_bundle.sql|missing_ss_bundle|t_kohgh@m1.com.sg, leslieb@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Multiple SurfShare parent|cfg_cra_multiple_parent.sql|multiple_ss_parent|t_kohgh@m1.com.sg, leslieb@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Misaligned SurfShare bundle (excluding multiple parent)|cfg_cra_misalign_bundle.sql|misalign_ss_exclparent|t_kohgh@m1.com.sg, leslieb@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Misaligned SurfShare bundle (multiple parents)|cfg_cra_duplicate_parent.sql|misaligned_ss_multiparent|t_kohgh@m1.com.sg, leslieb@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Orphaned SurfShare child (no bundle nor parent)|cfg_cra_orphan_surfshare.sql|pure_orphans|t_kohgh@m1.com.sg, leslieb@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Data bundles kiv(excluding surfshare, gsm data, mData)|cfg_cra_dataothers_main.sql|oth_data_bundles|t_kohgh@m1.com.sg, dereks@m1.com.sg|all
+SurfShare bundles kiv|cfg_cra_surfshare_main.sql|surfshare_bundles|t_kohgh@m1.com.sg, dereks@m1.com.sg|all
+Usage discount do not match PO|cfg_cra_mismatch_usgpo.sql|mismatch_usg_disc|t_kohgh@m1.com.sg, kohkl@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Wrongly terminated contract|cfg_cra_terminated_contract.sql|wrong_inactive_contract|t_kohgh@m1.com.sg, kohkl@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Gsm mData bundles kiv|cfg_cra_gsm_main.sql|gsm_mdata_bundles|t_kohgh@m1.com.sg, dereks@m1.com.sg|all
+Check if is backdated CBP with discount|cfg_cra_cbp_with_disc.sql|cbp_with_discount|t_kohgh@m1.com.sg, kohkl@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Missing BP SO (USG, RC, CBP)|cfg_cra_missingso_rcusgcbpdisc.sql|missing_bp_so|t_kohgh@m1.com.sg, leslieb@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Misaligned usage discount SO|cfg_cra_misalign_usgdisc.sql|misalign_usg_disc|t_kohgh@m1.com.sg, leslieb@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Missing global caps|cfg_cra_missing_globalcap.sql|missinggc|t_kohgh@m1.com.sg, dereks@m1.com.sg, shruti@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Misaligned global caps|cfg_cra_misalign_globalcap.sql|misaligngc|t_kohgh@m1.com.sg, dereks@m1.com.sg, shruti@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Multiple global caps|cfg_cra_multiple_globalcap.sql|multiplegc|t_kohgh@m1.com.sg, dereks@m1.com.sg, shruti@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Overlapping account level discounts|cfg_cra_overlap_acdisc.sql|overlapacdisc|t_kohgh@m1.com.sg, dereks@m1.com.sg,shruti@m1.com.sg, M1ISBillProductionSupport@m1.com.sg, dereks@m1.com.sg|all
+Clear temp shared tables|cfg_cra_temptables_clear.sql|clear_temptables|t_kohgh@m1.com.sg|all
+
+orphan
