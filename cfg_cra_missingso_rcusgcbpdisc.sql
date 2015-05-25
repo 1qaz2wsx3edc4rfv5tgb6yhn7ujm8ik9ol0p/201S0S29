@@ -33,12 +33,12 @@ disc_so as (select (select external_id from customer_id_acct_map@cust1 where acc
                 and exists (select 1 from subscriber_status@cust1 where subscr_no = oiv.subscr_no and status_id = 1 and inactive_dt is null) 
 ), subscriberlist as (select distinct subscr_no from (select subscr_no from rc_so union select subscr_no from disc_so))
 select distinct
-(select distinct first_value(external_id) over (order by active_dt desc, inactive_dt desc nulls first) from customer_id_acct_map@cust1 where (account_no = b.account_no or account_no = b.parent_account_no) and is_current = 1 and external_id_type = 1) account, 
+(select distinct first_value(external_id) over (order by active_date desc, inactive_date desc nulls first) from customer_id_acct_map@cust1 where (account_no = b.account_no or account_no = b.parent_account_no) and is_current = 1 and external_id_type = 1) account, 
 (select distinct first_value(external_id) over (order by active_date desc, inactive_date desc nulls first, external_id_type asc) from customer_id_equip_map_view@cust1 where subscr_no = b.subscr_no and view_status = 2 and external_id_type in (21,22,101,181,191,151,221)) service,
-a.bill_period,  a.prev_cutoff_date, a.account_no, b.subscr_no,
+a.bill_period, a.prev_cutoff_date, a.account_no, b.subscr_no,
 (select sv.display_value from subscriber_status@cust1 ss, status_values@cust1 sv where ss.status_id = sv.status_id and ss.subscr_no = b.subscr_no and ss.inactive_dt is null) subscr_status,
 b.offer_id, '"'||f.display_value||'"', f.primary_list_price, e.foreign_code, e.offer_type, b.offer_inst_id, b.chg_who, b.chg_dt, b.active_dt, b.inactive_dt,
-decode(b.active_dt, b.inactive_dt, 'Cancelled', NULL)Cancelled 
+decode(b.active_dt, b.inactive_dt, 'Cancelled', NULL) Cancelled 
 from offer_inst_view@cust1 b, offer_ref@cust1 e, offer_values@cust1 f, reseller_version@cust1 g, cmf@cust1 a
 where b.offer_id = e.offer_id and e.offer_id = f.offer_id and e.reseller_version_id = f.reseller_version_id and e.reseller_version_id = g.reseller_version_id
 and g.reseller_id = 7 and g.inactive_date is null and g.status in (3) and b.view_status = 2
@@ -80,12 +80,12 @@ AND ciem2.external_id_type = 91 AND ciem2.view_status = 2 AND ciem2.active_date 
 --AND ov1.offer_id = ciem1.external_id AND ov1.reseller_version_id = 39 AND ov2.offer_id = ciem2.external_id AND ov2.reseller_version_id = 39
 AND NOT EXISTS (SELECT 1 FROM offer_inst_view@cust1 oiv WHERE oiv.subscr_no = ciem2.subscr_no AND oiv.offer_id = 10624 AND oiv.view_status = 2 AND oiv.active_dt > To_Date('23-Feb-2015','dd-mon-yyyy'))
 ) select distinct
-(select distinct first_value(external_id) over (order by active_dt desc, inactive_dt desc nulls first) from customer_id_acct_map@cust1 where (account_no = b.account_no or account_no = b.parent_account_no) and is_current = 1 and external_id_type = 1) account, 
+(select distinct first_value(external_id) over (order by active_date desc, inactive_date desc nulls first) from customer_id_acct_map@cust1 where (account_no = b.account_no or account_no = b.parent_account_no) and is_current = 1 and external_id_type = 1) account, 
 (select distinct first_value(external_id) over (order by active_date desc, inactive_date desc nulls first, external_id_type asc) from customer_id_equip_map_view@cust1 where subscr_no = b.subscr_no and view_status = 2 and external_id_type in (21,22,101,181,191,151,221)) service,
-a.bill_period,  a.prev_cutoff_date, a.account_no, b.subscr_no,
+a.bill_period, a.prev_cutoff_date, a.account_no, b.subscr_no,
 (select sv.display_value from subscriber_status@cust1 ss, status_values@cust1 sv where ss.status_id = sv.status_id and ss.subscr_no = b.subscr_no and ss.inactive_dt is null) subscr_status,
 b.offer_id, '"'||f.display_value||'"', f.primary_list_price, e.foreign_code, e.offer_type, b.offer_inst_id, b.chg_who, b.chg_dt, b.active_dt, b.inactive_dt,
-decode(b.active_dt, b.inactive_dt, 'Cancelled', NULL)Cancelled 
+decode(b.active_dt, b.inactive_dt, 'Cancelled', NULL) Cancelled 
 from offer_inst_view@cust1 b, offer_ref@cust1 e, offer_values@cust1 f, reseller_version@cust1 g, cmf@cust1 a
 where b.offer_id = e.offer_id and e.offer_id = f.offer_id and e.reseller_version_id = f.reseller_version_id and e.reseller_version_id = g.reseller_version_id
 and g.reseller_id = 7 and g.inactive_date is null and g.status in (3) and b.view_status = 2
@@ -126,12 +126,12 @@ svc_usg_disc as (select oiv.parent_account_no, oiv.subscr_no, oiv.subscr_no_rese
                     and exists (select 1 from subscriber_status@cust1 where subscr_no = oiv.subscr_no and subscr_no_resets = oiv.subscr_no_resets and status_id = 1 and inactive_dt is null)
 )
 select distinct
-(select distinct first_value(external_id) over (order by active_dt desc, inactive_dt desc nulls first) from customer_id_acct_map@cust1 where (account_no = b.account_no or account_no = b.parent_account_no) and is_current = 1 and external_id_type = 1) account, 
+(select distinct first_value(external_id) over (order by active_date desc, inactive_date desc nulls first) from customer_id_acct_map@cust1 where (account_no = b.account_no or account_no = b.parent_account_no) and is_current = 1 and external_id_type = 1) account, 
 (select distinct first_value(external_id) over (order by active_date desc, inactive_date desc nulls first, external_id_type asc) from customer_id_equip_map_view@cust1 where subscr_no = b.subscr_no and view_status = 2 and external_id_type in (21,22,101,181,191,151,221)) service,
 a.bill_period, a.prev_cutoff_date, a.account_no, b.subscr_no,
 (select sv.display_value from subscriber_status@cust1 ss, status_values@cust1 sv where ss.status_id = sv.status_id and ss.subscr_no = b.subscr_no and ss.inactive_dt is null) subscr_status,
 b.offer_id, '"'||f.display_value||'"', f.primary_list_price, e.foreign_code, e.offer_type, b.offer_inst_id, b.chg_who, b.chg_dt, b.active_dt, b.inactive_dt,
-decode(b.active_dt, b.inactive_dt, 'Cancelled', NULL)Cancelled 
+decode(b.active_dt, b.inactive_dt, 'Cancelled', NULL) Cancelled 
 from offer_inst_view@cust1 b, offer_ref@cust1 e, offer_values@cust1 f, reseller_version@cust1 g, cmf@cust1 a
 where b.offer_id = e.offer_id and e.offer_id = f.offer_id and e.reseller_version_id = f.reseller_version_id and e.reseller_version_id = g.reseller_version_id
 and g.reseller_id = 7 and g.inactive_date is null and g.status in (3) and b.view_status = 2
