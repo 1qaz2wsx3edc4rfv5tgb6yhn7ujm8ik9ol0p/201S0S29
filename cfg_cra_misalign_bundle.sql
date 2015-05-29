@@ -10,7 +10,8 @@ header:set feedback off
 header:set numwidth 15
 
 alter session set nls_date_format = 'dd-Mon-yyyy hh24:mi:ss';
-select 'ACCOUNT','SERVICE','BILL_PERIOD','PREV_BILL_REFNO','ACCOUNT_NO','SUBSCR_NO','SUBSCR_STATUS','SS_ACTIVE','ACTIVE_COUNT','SUSPEND_COUNT','OFFER_ID','DISPLAY_VALUE','PRIMARY_LIST_PRICE','FOREIGN_CODE','OFFER_TYPE','OFFER_INST_ID','CHG_WHO','CHG_DT','ACTIVE_DT','INACTIVE_DT','CANCELLED' from dual;
+select 'ACCOUNT','SERVICE','BILL_PERIOD','PREV_BILL_REFNO','ACCOUNT_NO','SUBSCR_NO','SUBSCR_STATUS','SS_ACTIVE','ACTIVE_COUNT','SUSPEND_COUNT','OFFER_ID','DISPLAY_VALUE','PRIMARY_LIST_PRICE','FOREIGN_CODE','OFFER_TYPE','OFFER_INST_ID','CHG_WHO','CHG_DT','ACTIVE_DT','INACTIVE_DT','CANCELLED','REMARKS'  from dual;
+
 
 select distinct
 (select distinct first_value(external_id) over (order by active_date desc, inactive_date desc nulls first) from customer_id_acct_map@cust1 where (account_no = b.account_no or account_no = b.parent_account_no) and is_current = 1 and external_id_type = 1) account, 
@@ -176,4 +177,4 @@ and (select nvl(trunc(prev_cutoff_date),add_months(trunc(next_bill_date)-14,0)) 
 group by parent_account_no having count(*) > 1) abc
 ) where a.account_no = parent_account_no) -- Account to extract for SurfShare
 and b.offer_id in (102506,115052,115053,115054,115060,115061,115062,115114,115115,115116,115117,115122,115123,115124,115125,31249,31250,31251,32539,32540,32541,32570,32571,32572,32573,32574,32575,32576,32577,32578,32579,32580,32581,32582,32583,32584,32585,32586,32587,32588,32589,32590,32591,32592,32593) -- SurfShare
-order by a.account_no, b.subscr_no, f.primary_list_price, e.offer_type,  b.active_dt,e.foreign_code, b.offer_id asc;
+order by a.bill_period, a.account_no, b.subscr_no, f.primary_list_price, e.offer_type,  b.active_dt,e.foreign_code, b.offer_id asc;
